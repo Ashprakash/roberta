@@ -249,6 +249,10 @@ class WSCTask(FairseqTask):
                 sample['query_tokens'][0].unsqueeze(0),
                 sample['query_masks'][0].unsqueeze(0),
             )
+            print('Candidate Probabilities')
+            print(cand_lprobs)
+            print('Query Probabilities')
+            print(query_lprobs)
             return (query_lprobs >= cand_lprobs).all().item() == 1
         else:
             print('candidate scores')
