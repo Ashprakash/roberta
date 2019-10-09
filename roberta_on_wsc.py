@@ -1,6 +1,6 @@
 import torch
-roberta = torch.hub.load('pytorch/fairseq', 'roberta.large.wsc', user_dir='examples/roberta/wsc')
-roberta.cuda()  # use the GPU (optional)
+roberta = torch.hub.load('Ashprakash/roberta', 'roberta.large.wsc', user_dir='examples/roberta/wsc')
+#roberta.cuda()  # use the GPU (optional)
 
 roberta.disambiguate_pronoun('The _trophy_ would not fit in the brown suitcase because [it] was too big.')
 # True

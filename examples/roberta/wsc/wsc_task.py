@@ -219,7 +219,9 @@ class WSCTask(FairseqTask):
         return dataset
 
     def disambiguate_pronoun(self, model, sentence, use_cuda=False):
+        print('sentence being printed : '+sentence)
         sample_json = wsc_utils.convert_sentence_to_json(sentence)
+        print(sample_json)
         dataset = self.build_dataset_for_inference(sample_json)
         sample = dataset.collater([dataset[0]])
         if use_cuda:
@@ -249,8 +251,10 @@ class WSCTask(FairseqTask):
             )
             return (query_lprobs >= cand_lprobs).all().item() == 1
         else:
+            print('candidate scores')
             print(cand_lprobs)
             best_idx = cand_lprobs.argmax().item()
+            print(sample['candidate_tokens'])
             full_cand = sample['candidate_tokens'][0][best_idx]
             mask = sample['candidate_masks'][0][best_idx]
             toks = full_cand[mask]
