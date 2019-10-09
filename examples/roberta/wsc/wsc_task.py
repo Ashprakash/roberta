@@ -249,24 +249,12 @@ class WSCTask(FairseqTask):
                 sample['query_tokens'][0].unsqueeze(0),
                 sample['query_masks'][0].unsqueeze(0),
             )
-            print('Candidate Probabilities')
-            print(cand_lprobs)
-            print('Query Probabilities')
-            print(query_lprobs)
-            return (query_lprobs >= cand_lprobs).all().item() == 1
+            return query_lprobs, cand_lprobs
         else:
-            print('candidate scores')
-            print(cand_lprobs)
             best_idx = cand_lprobs.argmax().item()
-            print(sample['candidate_tokens'])
-            print('bestIdx : '+str(best_idx))
             full_cand = sample['candidate_tokens'][0][best_idx]
-            print(full_cand)
             mask = sample['candidate_masks'][0][best_idx]
-            print(full_cand)
             toks = full_cand[mask]
-            print(toks)
-            print(self.bpe.decode(self.source_dictionary.string(toks)).strip())
             return self.bpe.decode(self.source_dictionary.string(toks)).strip()
 
     @property
