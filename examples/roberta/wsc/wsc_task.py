@@ -262,7 +262,7 @@ class WSCTask(FairseqTask):
             print(full_cand)
             toks = full_cand[mask]
             print(toks)
-            print(self.source_dictionary.string(toks))
+            print(self.bpe.decode(self.source_dictionary.string(toks)).strip())
             return self.bpe.decode(self.source_dictionary.string(toks)).strip()
 
     @property
