@@ -255,9 +255,14 @@ class WSCTask(FairseqTask):
             print(cand_lprobs)
             best_idx = cand_lprobs.argmax().item()
             print(sample['candidate_tokens'])
+            print('bestIdx : '+str(best_idx))
             full_cand = sample['candidate_tokens'][0][best_idx]
+            print(full_cand)
             mask = sample['candidate_masks'][0][best_idx]
+            print(full_cand)
             toks = full_cand[mask]
+            print(toks)
+            print(self.source_dictionary.string(toks))
             return self.bpe.decode(self.source_dictionary.string(toks)).strip()
 
     @property
